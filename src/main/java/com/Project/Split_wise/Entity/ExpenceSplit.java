@@ -1,82 +1,75 @@
 package com.Project.Split_wise.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name="expencesplits")
 public class ExpenceSplit {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	
-	@ManyToOne
-	@JoinColumn(name="expense_id")
-	private Expence expense;
 
-	@ManyToOne
-	@JoinColumn(name="user_id")
-	private User user;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	private Double amount;
+    @ManyToOne
+    @JoinColumn(name = "expense_id")
+    private Expence expense;   // ✅ keep this name
 
-	private Boolean settled=false;
-	
-	public ExpenceSplit() {
-		
-	}
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-	public ExpenceSplit(int id, Expence expense, User user, Double amount, Boolean settled) {
-		super();
-		this.id = id;
-		this.expense = expense;
-		this.user = user;
-		this.amount = amount;
-		this.settled = settled;
-	}
+    private Double amount;
 
-	public int getId() {
-		return id;
-	}
+    private Boolean settled = false;
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public ExpenceSplit() {
+    }
 
-	public Expence getExpense() {
-		return expense;
-	}
+    public ExpenceSplit(Long id, Expence expense, User user, Double amount, Boolean settled) {
+        this.id = id;
+        this.expense = expense;
+        this.user = user;
+        this.amount = amount;
+        this.settled = settled;
+    }
 
-	public void setExpense(Expence expense) {
-		this.expense = expense;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setUser(User user) {
-		this.user = user;
-	}
+    public Expence getExpense() {
+        return expense;
+    }
 
-	public Double getAmount() {
-		return amount;
-	}
+    public void setExpense(Expence expense) {
+        this.expense = expense;
+    }
 
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	public Boolean getSettled() {
-		return settled;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
-	public void setSettled(Boolean settled) {
-		this.settled = settled;
-	}
-	
+    public Double getAmount() {
+        return amount;
+    }
 
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public Boolean getSettled() {
+        return settled;
+    }
+
+    public void setSettled(Boolean settled) {
+        this.settled = settled;
+    }
 }

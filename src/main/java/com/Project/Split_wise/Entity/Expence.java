@@ -8,114 +8,119 @@ import org.hibernate.annotations.CreationTimestamp;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="expences")
 public class Expence {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
 
-	@Column(nullable=false)
-	private String description;
-	@Column(nullable=false)
-	private Double amount;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@ManyToOne
-	@JoinColumn(name="paid_by")
-	private User paidBy;
+    @Column(nullable = false)
+    private String description;
 
-	@ManyToMany
-	@JoinColumn(name="group_id")
-	private Group group;
+    @Column(nullable = false)
+    private Double amount;
 
-	@CreationTimestamp
-	@Column(updatable=false)
-	private LocalDateTime createdAt;
+    // Who paid
+    @ManyToOne
+    @JoinColumn(name = "paid_by")
+    private User paidBy;
 
-	@OneToMany(mappedBy = "expence", cascade = CascadeType.ALL)
-	private List<ExpenceSplit> splits;
-	
+    // Expense belongs to ONE group ✅
+    @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group;
 
-	public Expence() {
-		
-	}
+    @CreationTimestamp
+    @Column(updatable = false)
+    private LocalDateTime createdAt;
 
+    // Splits
+    @OneToMany(mappedBy = "expense", cascade = CascadeType.ALL)
+    private List<ExpenceSplit> splits;
 
-	public Long getId() {
-		return id;
-	}
+    // Split type (EQUAL / EXACT / PERCENTAGE)
+    @Enumerated(EnumType.STRING)
+    private SplitType splitType;
 
+    // Default Constructor
+    public Expence() {
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    // Getters and Setters
 
+    public Long getId() {
+        return id;
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
+    public String getDescription() {
+        return description;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
+    public Double getAmount() {
+        return amount;
+    }
 
-	public Double getAmount() {
-		return amount;
-	}
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
 
+    public User getPaidBy() {
+        return paidBy;
+    }
 
-	public void setAmount(Double amount) {
-		this.amount = amount;
-	}
+    public void setPaidBy(User paidBy) {
+        this.paidBy = paidBy;
+    }
 
+    public Group getGroup() {
+        return group;
+    }
 
-	public User getPaidBy() {
-		return paidBy;
-	}
+    public void setGroup(Group group) {
+        this.group = group;
+    }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 
-	public void setPaidBy(User paidBy) {
-		this.paidBy = paidBy;
-	}
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 
+    public List<ExpenceSplit> getSplits() {
+        return splits;
+    }
 
-	public Group getGroup() {
-		return group;
-	}
+    public void setSplits(List<ExpenceSplit> splits) {
+        this.splits = splits;
+    }
 
+    public SplitType getSplitType() {
+        return splitType;
+    }
 
-	public void setGroup(Group group) {
-		this.group = group;
-	}
-
-
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
-
-	public List<ExpenceSplit> getSplits() {
-		return splits;
-	}
-
-
-	public void setSplits(List<ExpenceSplit> splits) {
-		this.splits = splits;
-	}
-	
+    public void setSplitType(SplitType splitType) {
+        this.splitType = splitType;
+    }
 }
