@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Project.Split_wise.Entity.Group;
 import com.Project.Split_wise.Service.GroupService;
+import com.Project.Splt_wise.Dto.GroupDto;
 @RestController
-@RequestMapping("/api/grpups")
+@RequestMapping("/api/groups")
 public class GroupController {
 	
 	
@@ -21,8 +22,8 @@ public class GroupController {
     private GroupService groupservice;
 	
 	@PostMapping
-	public Group creatGroup(@RequestBody Group group) {
-		return groupservice.createGroup(group);
+	public Group creatGroup(@RequestBody GroupDto dto) {
+		return groupservice.createGroup(dto);
 	}
 	
 	@GetMapping

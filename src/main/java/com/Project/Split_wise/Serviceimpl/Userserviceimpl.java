@@ -19,8 +19,6 @@ public class Userserviceimpl implements UserService {
 		this.userrepo=userrepo;
 	}
 	
-	
-	
 	@Override
 	public User registeruser(User user) {
 		// TODO Auto-generated method stub

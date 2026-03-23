@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
 public class Settelment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 
 	@ManyToOne
 	@JoinColumn(name="from_user_id")
@@ -40,7 +40,7 @@ public class Settelment {
 		
 	}
 
-	public Settelment(int id, User fromUser, User toUser, Double amount, Group group, LocalDateTime settledAt) {
+	public Settelment(Long id, User fromUser, User toUser, Double amount, Group group, LocalDateTime settledAt) {
 		super();
 		this.id = id;
 		this.fromUser = fromUser;
@@ -50,11 +50,11 @@ public class Settelment {
 		this.settledAt = settledAt;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

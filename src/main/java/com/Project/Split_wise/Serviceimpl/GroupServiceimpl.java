@@ -10,6 +10,7 @@ import com.Project.Split_wise.Entity.User;
 import com.Project.Split_wise.Repository.GroupRepository;
 import com.Project.Split_wise.Repository.UserRepository;
 import com.Project.Split_wise.Service.GroupService;
+import com.Project.Splt_wise.Dto.GroupDto;
 
 @Service
 public class GroupServiceimpl implements GroupService {
@@ -27,9 +28,23 @@ public class GroupServiceimpl implements GroupService {
 		this.userrepo = userrepo;
 	}
 
+	
 	@Override
-	public Group createGroup(Group group) {
+	public Group createGroup(GroupDto dto) {
 		// TODO Auto-generated method stub
+		
+		Group group=new Group();
+		group.setName(dto.getName());
+		
+		//member
+		List<User> users=userrepo.findAllById(dto.getMemberIds());
+		group.setMembers(users);
+		
+		//createdBy
+		
+		User createdByuser=userrepo.findById(dto.getCreatedby())
+				.orElseThrow(()->new RuntimeException("user not fount"));
+		group.setCreatedby(createdByuser);
 		return grouprepo.save(group);
 	}
 
@@ -58,5 +73,6 @@ public class GroupServiceimpl implements GroupService {
 		grouprepo.save(group);
 		
 	}
+
 
 }

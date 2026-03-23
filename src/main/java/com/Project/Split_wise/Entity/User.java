@@ -1,8 +1,7 @@
 package com.Project.Split_wise.Entity;
 
-import java.time.LocalDateTime;
 
-import org.hibernate.annotations.CreationTimestamp;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,71 +16,60 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int Uid;
+	private Integer Uid;
 	private String Uname;
 	
 	@Column(nullable=false, unique=true)
 	private String Uemail;
 	
+	@JsonProperty("password")
 	private String Password;
 	
-	@CreationTimestamp
-	@Column(updatable = false)
-	private LocalDateTime CreatedAt;
 	
 	public User() {
 		
 	}
-	
-	public User(int uid, String uname, String uemail, String password, LocalDateTime createdAt) {
-		super();
-		Uid = uid;
-		Uname = uname;
-		Uemail = uemail;
-		Password = password;
-		CreatedAt = createdAt;
-	}
 
-	public int getUid() {
+
+	public Integer getUid() {
 		return Uid;
 	}
 
-	public void setUid(int uid) {
+
+	public void setUid(Integer uid) {
 		Uid = uid;
 	}
+
 
 	public String getUname() {
 		return Uname;
 	}
 
+
 	public void setUname(String uname) {
 		Uname = uname;
 	}
+
 
 	public String getUemail() {
 		return Uemail;
 	}
 
+
 	public void setUemail(String uemail) {
 		Uemail = uemail;
 	}
+
 
 	public String getPassword() {
 		return Password;
 	}
 
+
 	public void setPassword(String password) {
 		Password = password;
 	}
 
-	public LocalDateTime getCreatedAt() {
-		return CreatedAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		CreatedAt = createdAt;
-	}
-	
 	
 
 }

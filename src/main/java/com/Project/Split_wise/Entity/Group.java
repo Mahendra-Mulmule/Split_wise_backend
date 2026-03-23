@@ -19,39 +19,34 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="user_groups")
+@Table(name = "user_groups")
 public class Group {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	@Column(nullable = false)
 	private String name;
 
 	@ManyToOne
-@JoinColumn(name="created_by")
+	@JoinColumn(name = "created_by")
 	private User createdby;
 
 	@ManyToMany
-	@JoinTable(
-			name="group_members", 
-	joinColumns =@JoinColumn(name="group_id"),
-	inverseJoinColumns=@JoinColumn
-	(name="user_id"))
+	@JoinTable(name = "group_members", joinColumns = @JoinColumn(name = "group_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private List<User> members;
-	
-	@OneToMany(mappedBy ="group" ,cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "group", cascade = CascadeType.ALL)
 	private List<Expence> expences;
-	
 
-    @CreationTimestamp
-    @Column(updatable = false)
+	@CreationTimestamp
+	@Column(updatable = false)
 	private LocalDateTime createdAt;
-    
-    public Group() {
-    	
-    }
 
-	public Group(int id, String name, User createdby, List<User> members, List<Expence> expences,
+	public Group() {
+
+	}
+
+	public Group(Long id, String name, User createdby, List<User> members, List<Expence> expences,
 			LocalDateTime createdAt) {
 		super();
 		this.id = id;
@@ -62,11 +57,11 @@ public class Group {
 		this.createdAt = createdAt;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -109,5 +104,5 @@ public class Group {
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
-    
+
 }

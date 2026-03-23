@@ -7,6 +7,7 @@ public class GroupDto {
 	 private Long id;
 	    private String name;
 	    private List<Long> memberIds;
+	    private Long createdby;
 		public Long getId() {
 			return id;
 		}
@@ -25,6 +26,14 @@ public class GroupDto {
 		public void setMemberIds(List<Long> memberIds) {
 			this.memberIds = memberIds;
 		}
+		public Long getCreatedby() {
+			return createdby;
+		}
+		public void setCreatedby(Long createdby) {
+			this.createdby = createdby;
+		}
+	 
+	    
 	    
 	    
 }
